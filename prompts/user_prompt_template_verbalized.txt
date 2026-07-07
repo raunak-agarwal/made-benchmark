@@ -1,0 +1,31 @@
+You are an AI assistant tasked with classifying a medical device adverse event report into one or more categories according to the FDA taxonomy. Your goal is to assign all relevant labels to the given report. The rules were provided in the system prompt. For the sake of clarity, we are repeating them here:
+- Assign all the labels that are relevant to the report, but only if you are sure about it.
+- You can choose multiple labels, a single label, or no labels if none apply.
+- Use exact label names from the provided taxonomy. Do not invent or modify labels.
+- Include parent and grandparent labels when selecting a child label.
+- Respond with a JSON dictionary containing the most relevant label codes and their confidence scores.
+- The confidence score should reflect how certain you are about each prediction, as a float between 0 and 1.
+- Use the format: {"A01": 0.95, "A0101": 0.72}.
+- Do not include any explanations or extra text.
+- If no labels apply, return an empty JSON object: {}.
+- Your output should contain only the JSON dictionary and nothing else.
+Example output:
+{"A04": 0.92, "A0405": 0.87, "A040507": 0.83, "E01": 0.95, "E0101": 0.91}
+
+1. First,  familiarize yourself with the label definitions:
+
+<labels>
+{LABELS}
+</labels>
+
+2. Review these few-shot examples of similar reports and their corresponding labels:
+
+<few-shot-examples>
+{EXAMPLES}
+</few-shot-examples>
+
+3. Now, carefully label the following report:
+
+<classification-text>
+{CLASSIFICATION_TEXT}
+</classification-text>

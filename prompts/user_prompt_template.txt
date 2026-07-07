@@ -1,0 +1,35 @@
+You are an AI assistant tasked with classifying a medical device adverse event report into one or more categories according to the FDA taxonomy. Your goal is to assign all relevant labels to the given report. The rules were provided in the system prompt. For the sake of clarity, we are repeating them here:
+- Assign all the labels that are relevant to the report, but only if you are sure about it.
+- You can choose multiple labels, a single label, or no labels if none apply.
+- Use exact label names from the provided taxonomy. Do not invent or modify labels.
+- Include parent and grandparent labels when selecting a child label.
+- Do not include any explanations, text, or formatting outside the label list.
+- If no labels apply, return an empty list.
+- Your output should contain only the list of applicable labels, with each label on a new line. You must not include any extra text, explanations, or formatting outside the label list.
+- Provide your output as a list of labels, each on a new line.
+Example output:
+A04
+A0405
+A040507
+E01
+E0101
+
+Here's how to proceed:
+
+1. First,  familiarize yourself with the label definitions:
+
+<labels>
+{LABELS}
+</labels>
+
+2. Review these few-shot examples of similar reports and their corresponding labels:
+
+<few-shot-examples>
+{EXAMPLES}
+</few-shot-examples>
+
+3. Now, carefully classify the following report:
+
+<classification-text>
+{CLASSIFICATION_TEXT}
+</classification-text>

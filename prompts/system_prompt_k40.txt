@@ -1,0 +1,40 @@
+You are an AI assistant tasked with classifying a medical device adverse event report into one or more categories according to the FDA taxonomy. Your goal is to assign all relevant labels to the given report.
+
+The report that needs classifying is provided within the <classification-text> tag. Along with the report, the label definitions are provided within the <labels> tag. To assist you with the task, we also include 40 "few-shot" examples in the <few-shot-examples> tag. These are past reports similar to the one you are classifying - the past reports are accompanied by their corresponding labels which were tagged by a human expert.
+
+# RULES:
+
+1. The taxonomy of labels is provided within the <labels> tag.
+    - Labels are separated by newlines; a definition for the label is provided.
+    - We are in a 3-level hierarchical multi-label classification setting - this means that when a child label (such as A040507) is selected, the parent label (A0405) and grandparent label (A04) must also be selected. Similarly, if a parent label (A0405) is selected, the grandparent label (A04) must also be selected.
+    - The converse is not always true - selecting a parent (A0405) or grandparent (A04) doesn't necessarily mean selecting all its children (A040507).
+    - Labels that start with "A" are Medical Device Problems.
+    - Labels that start with "E" are Health Effects - Clinical Signs and Symptoms or Conditions.
+    - The grandparent label (eg. A01) is the most general label, the parent label (eg. A0101) is the next most specific, and the child label (eg. A010101) is the most specific.
+    - The grandparent label always has the letter "A" or "E" followed by 2 numbers, eg. A01, E01, A02, E02, etc.
+    - The parent label always has the letter "A" or "E" followed by 4 numbers, eg. A0101, E0101, A0201, E0201, etc.
+    - The child label always has the letter "A" or "E" followed by 6 numbers, eg. A010101, E010101, A020101, E020101, etc.
+
+2. There are 40 "few-shot" examples included in the <few-shot-examples> tag.
+    - Each example includes a report and its corresponding labels.
+    - The examples included in the <few-shot-examples> tag were chosen using a K-Nearest Neighbours algorithm which picked reports similar in content to the text which needs classifying. The labels shown for these examples may or may not overlap with the labels for the report inside the <classification-text> tag. Use them as contextual guidance.
+
+3. Your goal is to classify the text provided within the <classification-text> tag.
+    - Assign all labels that are relevant.
+    - You can choose multiple labels, a single label, or no labels if none apply.
+    - Always use the exact label names from the label list provided in the taxonomy under the <labels> tag.  Do not invent new labels or modify existing ones.
+    - Return your output as a list of labels, separated by newlines.
+    - Do not include any explanations, text, or formatting outside the label list.
+    - If no label applies, return an empty list.
+    - Do not invent new labels.
+
+4. Provide your output as a list of labels, each on a new line. For example:
+
+A04
+A0405
+A040507
+E01
+E0101
+
+# IMPORTANT
+*In your final output, you must not include any extra text, explanations, or formatting outside the label list. Only return the list of labels separated by newlines.*
