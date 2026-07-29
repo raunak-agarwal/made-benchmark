@@ -1,6 +1,7 @@
 # MADE: A Living Benchmark for Multi-Label Text Classification with Uncertainty Quantification of Medical Device Adverse Events
 
 [**📄 Paper (ACL 2026)**](https://aclanthology.org/2026.acl-long.2148/) ·
+[**Blog**](https://raunak-agarwal.github.io/made-benchmark/)
 [**🤗 Dataset**](https://huggingface.co/datasets/ragarwal/MADE-Multilabel-Benchmark) ·
 [**🖥️ Interactive Demo**](https://hhi.fraunhofer.de/aml-demonstrator/made-benchmark)
 
